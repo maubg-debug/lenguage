@@ -1,0 +1,51 @@
+# Este es un comentarioo
+
+FUN oopify(prefix) -> prefix + "oop"
+
+FUN juntar(elementos, separador)
+	VAR result = ""
+	VAR len = LEN(elementos)
+
+	FOR i = 0 TO len THEN
+		VAR result = result + elementos/i
+		IF i != len - 1 THEN VAR result = result + separador
+	END
+
+	RETURN result
+END
+
+FUN mapear(elementos, func)
+	VAR nuevo_elemento = []
+
+	FOR i = 0 TO LEN(elementos) THEN
+		APPEND(nuevo_elemento, func(elementos/i))
+	END
+
+	RETURN nuevo_elemento
+END
+
+PRINT("¡Hola mundo!")
+
+PRINT("Escribe Tu nombre")
+
+VAR input = INPUT()
+PRINT("hola " + input)
+
+FOR i = 0 TO 5 THEN
+	IF i == 3 THEN 
+		PRINT("eL INDEX del i es 3")
+	END
+	IF NOT i == 3 THEN 
+		PRINT("eL INDEX del i no es 3")
+	END
+END
+
+VAR booleano = TRUE
+
+WHILE booleano THEN
+	PRINT(juntar(mapear(["l", "sp"], oopify), ", "))
+
+	IF booleano THEN 
+		BREAK
+	END
+END
