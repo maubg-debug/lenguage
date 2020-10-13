@@ -1,9 +1,9 @@
 import maulen
 
 while True:
-	text = input('maulen > ')
-	if text.strip() == "": continue
-	result, error = maulen.run('<stdin>', text)
+	texto = input('maulen > ')
+	if texto.strip() == "": continue
+	result, error = maulen.run('<stdin>', texto)
 
 	if error:
 		print(error.como_string())

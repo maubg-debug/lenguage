@@ -196,6 +196,8 @@ class Lexer:
         tokens.append(self.make_identifier())
       elif self.current_char == '"':
         tokens.append(self.make_string())
+      elif self.current_char == "'":
+            tokens.append(self.make_string())
       elif self.current_char == '+':
         tokens.append(Token(TT_PLUS, posicion_inicial=self.pos))
         self.advance()
@@ -1700,7 +1702,7 @@ class BuiltInFunction(BaseFunction):
   execute_print_ret.arg_names = ['value']
   
   def execute_input(self, exec_ctx):
-    text = input()
+    text = input("--> ")
     return RTResult().success(String(text))
   execute_input.arg_names = []
 
