@@ -34,8 +34,7 @@ PRINT("hola " + input)
 FOR i = 0 TO 5 THEN
 	IF i == 3 THEN 
 		PRINT("eL INDEX del i es 3")
-	END
-	IF NOT i == 3 THEN 
+	ELIF NOT i == 3 THEN 
 		PRINT("eL INDEX del i no es 3")
 	END
 END
