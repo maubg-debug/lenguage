@@ -1839,7 +1839,7 @@ class BuiltInFunction(BaseFunction):
     except Exception as e:
       return RTResult().failure(RTError(
         self.posicion_inicial, self.posicion_final,
-        f"Failed to load script \"{fn}\"\n" + str(e),
+        f"No se a conseguido cargar \"{fn}\"\n" + str(e),
         exec_ctx
       ))
 
@@ -1848,7 +1848,7 @@ class BuiltInFunction(BaseFunction):
     if error:
       return RTResult().failure(RTError(
         self.posicion_inicial, self.posicion_final,
-        f"Failed to finish executing script \"{fn}\"\n" +
+        f"Fallado al terminar \"{fn}\"\n" +
         error.como_string(),
         exec_ctx
       ))
