@@ -9,6 +9,6 @@ while True:
 		print(error.como_string())
 	elif result:
 		if len(result.elements) == 1:
-			print(repr(result.elements[0]))
+    			print("\n\n - Se ha finalizado el programa :: " + repr(result.elements[0]) + " - \n\n")
 		else:
-			print(repr(result))
+			print("\n\n Se ha finalizado el programa :: " + repr(result) + " - \n\n")
