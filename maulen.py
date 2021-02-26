@@ -571,7 +571,7 @@ class Parser:
     if not res.error and self.current_tok.type != TT_EOF:
       return res.failure(InvalidSyntaxError(
         self.current_tok.posicion_inicial, self.current_tok.posicion_final,
-        "Token cannot appear after previous tokens"
+        "El token no puede aparecer después de los tokens anteriores"
       ))
     return res
 
@@ -1371,7 +1371,7 @@ class Value:
     return RTResult().failure(self.illegal_operation())
 
   def copy(self):
-    raise Exception('No copy method defined')
+    raise Exception('Ningun method para copiar')
 
   def is_true(self):
     return False
@@ -1380,7 +1380,7 @@ class Value:
     if not other: other = self
     return RTError(
       self.posicion_inicial, other.posicion_final,
-      'Illegal operation',
+      'Operacion ilegal',
       self.context
     )
 
@@ -1412,7 +1412,7 @@ class Number(Value):
       if other.value == 0:
         return None, RTError(
           other.posicion_inicial, other.posicion_final,
-          'Division by zero',
+          'Division por 0',
           self.context
         )
 
@@ -1548,7 +1548,7 @@ class List(Value):
       except:
         return None, RTError(
           other.posicion_inicial, other.posicion_final,
-          'Element at this index could not be removed from list because index is out of bounds',
+          'El token no puede aparecer después de los tokens anteriores',
           self.context
         )
     else:
@@ -1569,7 +1569,7 @@ class List(Value):
       except:
         return None, RTError(
           other.posicion_inicial, other.posicion_final,
-          'Element at this index could not be retrieved from list because index is out of bounds',
+          'El elemento en este índice no se pudo recuperar de la lista porque el índice está fuera de los límites',
           self.context
         )
     else:
@@ -1603,14 +1603,14 @@ class BaseFunction(Value):
     if len(args) > len(arg_names):
       return res.failure(RTError(
         self.posicion_inicial, self.posicion_final,
-        f"{len(args) - len(arg_names)} too many args passed into {self}",
+        f"{len(args) - len(arg_names)} demasiados argumentos pasaron a {self}",
         self.context
       ))
     
     if len(args) < len(arg_names):
       return res.failure(RTError(
         self.posicion_inicial, self.posicion_final,
-        f"{len(arg_names) - len(args)} too few args passed into {self}",
+        f"{len(arg_names) - len(args)} Muy pocos argumentos pasaron a {self}",
         self.context
       ))
 
@@ -1679,7 +1679,7 @@ class BuiltInFunction(BaseFunction):
     return res.success(return_value)
   
   def no_visit_method(self, node, context):
-    raise Exception(f'No execute_{self.name} method defined')
+    raise Exception(f'ningun execute_{self.name} método definido')
 
   def copy(self):
     copy = BuiltInFunction(self.name)
