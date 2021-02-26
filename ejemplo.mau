@@ -1,22 +1,5 @@
 # Este es un comentarioo
 
-VAR num = 5
+VAR input = INPUT()
 
-FUN check(numero) 
-
-	IF numero == num THEN
-		RETURN TRUE
-	END
-
-	RETURN FALSE
-END
-
-FOR i = 0 TO 5 THEN
-	VAR input = INPUT()
-
-	IF check(input) THEN
-		PRINT("Felizidades")
-	ELSE
-		PRINT("Intentalo mas tarde")
-	END
-END
+PRINT("Hola"+input)
