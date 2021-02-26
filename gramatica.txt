@@ -6,7 +6,7 @@ declaración : PALABRA CLAVE: RETURN expr?
             : expr
 
 expr        : KEYWORD:VAR IDENTIFICAR EQ expr
-            : comp-expr ((KEYWORD:AND|KEYWORD:OR) comp-expr)*
+            : comp-expr ((PALABRA CLAVE:AND|PALABRA CLAVE:OR) comp-expr)*
 
 expr        : PALABRA CLAVE: VAR IDENTIFICAR EQ expr
             : comp-expr ((PALABRA CLAVE:AND| PALABRA CLAVE:OR) comp-expr) *
@@ -14,7 +14,7 @@ expr        : PALABRA CLAVE: VAR IDENTIFICAR EQ expr
 comp-expr   : NOT comp-expr
             : arith-expr ((EE|LT|GT|LTE|GTE) arith-expr)*
 
-arith-expr  :	term ((MAS|MENOS) term)*
+arith-expr  :	term ((PLUS|MINUS) term)*
 
 term        : factor ((MUL|DIV) factor)*
 
