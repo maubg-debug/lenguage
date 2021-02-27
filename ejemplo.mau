@@ -29,6 +29,8 @@ while true then
 
     if init_num == 20 then
         break
+    else if init_num == 10 then
+        printLn("Llegado a 10!")
     else
         continue
     end
@@ -76,9 +78,22 @@ end
 
 printLn(length([1, 2, 3, 4, 5]))
 
+sleep(2)
 
-sleep(5)
+CLS()
 
-CLS
+# palabras extra: none, pi, print_return(arg), pop(array, index), extend(), (true, false)
 
-# palabras extra: none, pi, print_return(), pop(), extend(), (true, false)
+# not / and / or
+
+printLn(false)
+printLn(not false)
+
+# if not
+#    ^^^
+
+# if true or "hola"
+#         ^^
+
+# if true and "hola"
+#         ^^^

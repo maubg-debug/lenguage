@@ -63,7 +63,7 @@ class RTError(Error):
     ctx = self.context
 
     while ctx:
-      result = f'  Archivo {pos.fn}, linea {str(pos.ln + 1)}, en {ctx.display_name}\n' + resultado
+      result = f'  Archivo {pos.fn}, linea {str(pos.ln + 1)}, en {ctx.display_name}\n\n' + resultado
       pos = ctx.parent_entry_pos
       ctx = ctx.parent
 
@@ -126,9 +126,9 @@ TT_EOF				= 'EOF'
 
 KEYWORDS = [
   'var',
-  '&&',
-  'OR',
-  '||',
+  'and',
+  'or',
+  'not',
   'if',
   'else if',
   'else',
@@ -643,7 +643,7 @@ class Parser:
     if res.error:
       return res.failure(InvalidSyntaxError(
         self.current_tok.posicion_inicial, self.current_tok.posicion_final,
-        "Se esperaba 'return', 'continue', 'break', 'var', 'if', 'for', 'while', 'func', int, float, identifier, '+', '-', '(', '[' or '||'"
+        "Se esperaba 'return', 'continue', 'break', 'var', 'if', 'for', 'while', 'func', int, float, identifier, '+', '-', '(', '[' or 'not'"
       ))
     return res.success(expr)
 
@@ -676,12 +676,12 @@ class Parser:
       if res.error: return res
       return res.success(VarAssignNode(var_name, expr))
 
-    node = res.register(self.bin_op(self.comp_expr, ((TT_KEYWORD, '&&'), (TT_KEYWORD, 'OR'))))
+    node = res.register(self.bin_op(self.comp_expr, ((TT_KEYWORD, 'and'), (TT_KEYWORD, 'or'))))
 
     if res.error:
       return res.failure(InvalidSyntaxError(
         self.current_tok.posicion_inicial, self.current_tok.posicion_final,
-        "Se esperaba 'var', 'if', 'for', 'while', 'func', int, float, identifier, '+', '-', '(', '[' or '||'"
+        "Se esperaba 'var', 'if', 'for', 'while', 'func', int, float, identifier, '+', '-', '(', '[' o 'not'"
       ))
 
     return res.success(node)
@@ -689,7 +689,7 @@ class Parser:
   def comp_expr(self):
     res = ParseResult()
 
-    if self.current_tok.matches(TT_KEYWORD, '||'):
+    if self.current_tok.matches(TT_KEYWORD, 'not'):
       op_tok = self.current_tok
       res.register_advancement()
       self.advance()
@@ -703,7 +703,7 @@ class Parser:
     if res.error:
       return res.failure(InvalidSyntaxError(
         self.current_tok.posicion_inicial, self.current_tok.posicion_final,
-        "Se esperaba int, float, identifier, '+', '-', '(', '[', 'if', 'for', 'while', 'func' or '||'"
+        "Se esperaba int, float, identifier, '+', '-', '(', '[', 'if', 'for', 'while', 'func' or 'not'"
       ))
 
     return res.success(node)
@@ -748,7 +748,7 @@ class Parser:
         if res.error:
           return res.failure(InvalidSyntaxError(
             self.current_tok.posicion_inicial, self.current_tok.posicion_final,
-            "Se esperaba ')', 'var', 'if', 'for', 'while', 'func', int, float, identifier, '+', '-', '(', '[' or '||'"
+            "Se esperaba ')', 'var', 'if', 'for', 'while', 'func', int, float, identifier, '+', '-', '(', '[' or 'not'"
           ))
 
         while self.current_tok.type == TT_COMMA:
@@ -855,7 +855,7 @@ class Parser:
       if res.error:
         return res.failure(InvalidSyntaxError(
           self.current_tok.posicion_inicial, self.current_tok.posicion_final,
-          "Se esperaba ']', 'var', 'if', 'for', 'while', 'func', int, float, identifier, '+', '-', '(', '[' or '||'"
+          "Se esperaba ']', 'var', 'if', 'for', 'while', 'func', int, float, identifier, '+', '-', '(', '[' or 'not'"
         ))
 
       while self.current_tok.type == TT_COMMA:
@@ -1708,18 +1708,19 @@ class BuiltInFunction(BaseFunction):
   execute_input.arg_names = []
 
   def execute_sleep(self, exec_ctx):
-    tiempo = exec_ctx.exec_ctx.symbol_table.get('time')
+    tiempo = repr(exec_ctx.symbol_table.get('value'))
+
     try:
       tiempo = float(tiempo)
       time.sleep(tiempo)
-    except ValueError:
+    except:
       return RTResult().failure(RTError(
         self.posicion_inicial, self.posicion_final,
         "El argumento deve de ser un float, int",
         exec_ctx
       ))
     return RTResult().success(String(str(tiempo)))
-  execute_sleep.arg_names = ['time']
+  execute_sleep.arg_names = ['value']
 
   def execute_input_int(self, exec_ctx):
     while True:
@@ -2010,9 +2011,9 @@ class Interpreter:
       result, error = left.get_comparison_lte(right)
     elif node.op_tok.type == TT_GTE:
       result, error = left.get_comparison_gte(right)
-    elif node.op_tok.matches(TT_KEYWORD, '&&'):
+    elif node.op_tok.matches(TT_KEYWORD, 'and'):
       result, error = left.anded_by(right)
-    elif node.op_tok.matches(TT_KEYWORD, '||'):
+    elif node.op_tok.matches(TT_KEYWORD, 'or'):
       result, error = left.ored_by(right)
 
     if error:
