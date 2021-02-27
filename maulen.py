@@ -186,7 +186,7 @@ class Lexer:
     while self.current_char != None:
       if self.current_char in ' \t':
         self.advance()
-      elif self.current_char == '#':
+      elif self.current_char == "/" and self.text[self.pos.idx + 1] == "/" and self.text[self.pos.idx + 2] == "-":
         self.skip_comment()
       elif self.current_char in ';\n':
         tokens.append(Token(TT_NEWLINE, posicion_inicial=self.pos))
@@ -1944,6 +1944,40 @@ class BuiltInFunction(BaseFunction):
 
   execute_isinstance.arg_names = ["value", "value2"]
 
+  execute_type.arg_names = ["value"]
+
+  def execute_has_value(self, exec_ctx):
+    list_ = exec_ctx.symbol_table.get("list")
+    value = exec_ctx.symbol_table.get("value")
+
+    if not isinstance(list_, List):
+      return RTResult().failure(RTError(
+        self.posicion_inicial, self.posicion_final,
+        "El segundo argumento debe ser una cadena",
+        exec_ctx
+      ))
+
+    if isinstance(value, String):
+      value = str(value)
+    elif isinstance(value, Number):
+      if "." in str(value):
+        value = float(str(value))
+      else:
+        value = int(str(value))        
+
+    for i in list_.elements:
+      if isinstance(i, Number):
+        i = int(repr(i)) if not "." in str(i) else float(repr(i))
+      if isinstance(i, String):
+        i = str(i)
+
+      if value == i:
+        return RTResult().success(Number.true)
+    
+    return RTResult().success(Number.false)
+
+  execute_has_value.arg_names = ["list", "value"]
+
   def execute_run(self, exec_ctx):
     fn = exec_ctx.symbol_table.get("fn")
 
@@ -2002,6 +2036,7 @@ BuiltInFunction.float				= BuiltInFunction("float")
 BuiltInFunction.bool      	= BuiltInFunction("bool")
 BuiltInFunction.type				= BuiltInFunction("type")
 BuiltInFunction.isinstance	= BuiltInFunction("isinstance")
+BuiltInFunction.has_value	  = BuiltInFunction("has_value")
 
 #######################################
 # CONTEXTO
@@ -2321,6 +2356,7 @@ global_symbol_table.set("float", BuiltInFunction.float)
 global_symbol_table.set("bool", BuiltInFunction.bool)
 global_symbol_table.set("type", BuiltInFunction.type)
 global_symbol_table.set("isinstance", BuiltInFunction.isinstance)
+global_symbol_table.set("has_value", BuiltInFunction.has_value)
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 # 
