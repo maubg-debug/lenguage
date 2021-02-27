@@ -9,7 +9,7 @@ def cuerdas_con_flechas(text, pos_comienzo, pos_final):
 	# generar cada linea
 	line_count = pos_final.ln - pos_comienzo.ln + 1
 	for i in range(line_count):
-		# Calculate line columns
+    		
 		line = text[idx_start:idx_end]
 		col_start = pos_comienzo.col if i == 0 else 0
 		col_end = pos_final.col if i == line_count - 1 else len(line) - 1
