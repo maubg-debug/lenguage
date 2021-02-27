@@ -1,5 +1,84 @@
-# Este es un comentarioo
 
-VAR input = INPUT()
 
-PRINT("Hola"+input)
+# Comentario
+
+# Print
+printLn("Hola")
+
+# - Inputs -
+var input1 = input()
+var input2 = int_input()
+
+# For loops / arrays
+
+var arr = []
+
+for i = 0 to 5 then
+    join(arr, i)
+end
+
+printLn(arr)
+
+# While loops / sumar strings / sumar numeros / bools (true, false) / if statements / continue / break
+
+var init_str = ""
+var init_num = 5
+
+while true then
+    var init_num = init_num + 5
+
+    if init_num == 20 then
+        break
+    else
+        continue
+    end
+end
+
+printLn(init_str)
+
+# Functions / arrow functions / args (arg1, arg2, ...)
+
+func arrow(texto) -> "hola, " + texto
+
+func main()
+    var res = arrow(input1)
+    printLn(res)
+end
+
+main()
+
+# Mates
+
+printLn(2 + 2)
+printLn(2 * 2)
+printLn(2 ^ 2)
+printLn(2 - 2)
+printLn(2 / 2)
+printLn(2.45 + 2)
+
+# is_* / func return
+
+func test()
+    return "hola"
+end
+
+if is_func(test) then
+    printLn("Es func!")
+end
+
+# is_func
+# is_list
+# is_str
+# is_int
+
+
+# Extras
+
+printLn(length([1, 2, 3, 4, 5]))
+
+
+sleep(5)
+
+CLS
+
+# palabras extra: none, pi, print_return(), pop(), extend(), (true, false)
