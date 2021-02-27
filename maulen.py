@@ -1738,6 +1738,86 @@ class BuiltInFunction(BaseFunction):
     return RTResult().success(Number.null)
   execute_clear.arg_names = []
 
+  def execute_int(self, exec_ctx):
+    val = str(exec_ctx.symbol_table.get("value"))
+    
+    for char in val:
+      if char not in DIGITOS:
+        return RTResult().failure(RTError(
+          self.posicion_inicial, self.posicion_final,
+          "En el argumento hay un caracter ({}) que no se puede convertir a int()",
+          exec_ctx
+        ))
+    
+    return RTResult().success(Number(int(val)))
+  execute_int.arg_names = ["value"]
+
+  def execute_str(self, exec_ctx):
+    val = str(repr(exec_ctx.symbol_table.get("value")))
+    
+    return RTResult().success(String(val))
+  execute_str.arg_names = ["value"]
+
+  def execute_float(self, exec_ctx):
+    val = repr(exec_ctx.symbol_table.get("value"))
+    
+    try:
+      val = float(val)
+    except ValueError:
+      return RTResult().failure(RTError(
+        self.posicion_inicial, self.posicion_final,
+        "No se puede convertir a float()",
+        exec_ctx
+      ))   
+
+    return RTResult().success(Number(val))
+  execute_float.arg_names = ["value"]
+
+  def execute_bool(self, exec_ctx):
+    val = exec_ctx.symbol_table.get("value")
+    
+    if isinstance(val, List):
+      if len(val.elements) == 0:
+        return RTResult().success(Number.false)
+      else:
+        return RTResult().success(Number.true)
+    elif isinstance(val, String):
+      if len(str(val)) == 0:
+        return RTResult().success(Number.false)
+      else:
+        return RTResult().success(Number.true)
+    elif isinstance(val, Number):
+      if int(repr(val)) == 0:
+        return RTResult().success(Number.false)
+      else:
+        return RTResult().success(Number.true)
+  
+  execute_bool.arg_names = ["value"]
+
+  def execute_sum(self, exec_ctx):
+    
+    lista_ = exec_ctx.symbol_table.get("lista")
+    if not isinstance(lista_, List):
+      return RTResult().failure(RTError(
+        self.posicion_inicial, self.posicion_final,
+        "El primer argumento debe ser una lista",
+        exec_ctx
+      ))
+    else:
+      num = 0
+      for i in lista_.elements:
+        i = repr(i)
+        if "." in i:
+          num += float(i)
+          continue
+          
+        num += int(i)
+
+      # print(num)
+
+    return RTResult().success(Number(num))
+  execute_sum.arg_names = ['lista']
+
   def execute_is_number(self, exec_ctx):
     is_number = isinstance(exec_ctx.symbol_table.get("value"), Number)
     return RTResult().success(Number.true if is_number else Number.false)
@@ -1837,6 +1917,33 @@ class BuiltInFunction(BaseFunction):
     return RTResult().success(Number(len(list_.elements)))
   execute_len.arg_names = ["list"]
 
+  def execute_type(self, exec_ctx):
+    obj = exec_ctx.symbol_table.get("value")
+
+    if isinstance(obj, List):
+      return RTResult().success(String('<class \'list\'>'))
+    elif isinstance(obj, Number):
+      return RTResult().success(String('<class \'int\'>'))
+    elif isinstance(obj, String):
+      return RTResult().success(String('<class \'str\'>'))
+    elif isinstance(obj, Number) and "." in str(repr(obj)):
+      return RTResult().success(String('<class \'float\'>'))
+    else:
+      return RTResult().success(String(str(repr(obj))))
+
+  execute_type.arg_names = ["value"]
+
+  def execute_isinstance(self, exec_ctx):
+    obj = exec_ctx.symbol_table.get("value")
+    obj2 = exec_ctx.symbol_table.get("value2")
+
+    if type(obj) == type(obj2):
+      return RTResult().success(Number.true)
+    else:
+      return RTResult().success(Number.false)      
+
+  execute_isinstance.arg_names = ["value", "value2"]
+
   def execute_run(self, exec_ctx):
     fn = exec_ctx.symbol_table.get("fn")
 
@@ -1888,6 +1995,13 @@ BuiltInFunction.extend      = BuiltInFunction("extend")
 BuiltInFunction.len					= BuiltInFunction("len")
 BuiltInFunction.run					= BuiltInFunction("run")
 BuiltInFunction.sleep				= BuiltInFunction("sleep")
+BuiltInFunction.sum				  = BuiltInFunction("sum")
+BuiltInFunction.int				  = BuiltInFunction("int")
+BuiltInFunction.str				  = BuiltInFunction("str")
+BuiltInFunction.float				= BuiltInFunction("float")
+BuiltInFunction.bool      	= BuiltInFunction("bool")
+BuiltInFunction.type				= BuiltInFunction("type")
+BuiltInFunction.isinstance	= BuiltInFunction("isinstance")
 
 #######################################
 # CONTEXTO
@@ -2200,6 +2314,13 @@ global_symbol_table.set("pop", BuiltInFunction.pop)
 global_symbol_table.set("extend", BuiltInFunction.extend)
 global_symbol_table.set("length", BuiltInFunction.len)
 global_symbol_table.set("run", BuiltInFunction.run)
+global_symbol_table.set("sum", BuiltInFunction.sum)
+global_symbol_table.set("int", BuiltInFunction.int)
+global_symbol_table.set("str", BuiltInFunction.str)
+global_symbol_table.set("float", BuiltInFunction.float)
+global_symbol_table.set("bool", BuiltInFunction.bool)
+global_symbol_table.set("type", BuiltInFunction.type)
+global_symbol_table.set("isinstance", BuiltInFunction.isinstance)
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 # 
