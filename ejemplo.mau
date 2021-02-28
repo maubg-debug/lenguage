@@ -1,6 +1,6 @@
 func decirHola(nombre) -> "Hola, " + nombre
 
-func main()
+func main() then
 
     printLn("Hola ¿Como te llamas?");
     var nombre = input()
