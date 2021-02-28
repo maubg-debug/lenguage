@@ -1205,10 +1205,10 @@ class Parser:
         True
       ))
     
-    if self.current_tok.type != TT_NEWLINE:
+    if not self.current_tok.matches(TT_KEYWORD, 'then'):
       return res.failure(InvalidSyntaxError(
         self.current_tok.posicion_inicial, self.current_tok.posicion_final,
-        f"Se esperaba '->' o NUEVALINEA"
+        f"Se esperaba '->' o 'then'"
       ))
 
     res.register_advancement()
