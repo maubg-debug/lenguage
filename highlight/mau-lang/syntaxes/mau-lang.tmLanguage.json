@@ -3,19 +3,22 @@
 	"name": "mau-lan",
 	"patterns": [
 		{
+			"include": "#todo-keyword"
+		},
+		{
 			"include": "#comments"
 		},
 		{
 			"include": "#strings"
 		},
 		{
-			"include": "#strings_single"
+			"include": "#numbers"
 		},
 		{
 			"include": "#paren-expression"
 		},
 		{
-			"include": "#todo-keyword"
+			"include": "#bool"
 		},
 		{
 			"include": "#ctrl-expressions"
@@ -27,7 +30,7 @@
 			"include": "#keywords"
 		},
 		{
-			"include": "#numbers"
+			"include": "#markups"
 		}
 	],
 	"repository": {
@@ -48,7 +51,7 @@
 		"reserved-words": {
 			"patterns": [
 				{
-					"name": "entity.name.function.member.mau-lang",
+					"name": "variable.language.mau-lang",
 					"match": "\\b(func|var)\\b"
 				}
 			]
@@ -62,24 +65,21 @@
 			]
 		},
 		"strings": {
-			"name": "string.quoted.double.mau-lang",
-			"begin": "\"",
-			"end": "\"",
 			"patterns": [
 				{
-					"name": "constant.character.escape.mau-lang",
-					"match": "\\\\."
-				}
-			]
-		},
-		"strings_single": {
-			"name": "string.quoted.single.mau-lang",
-			"begin": "'",
-			"end": "'",
-			"patterns": [
+					"name": "string.quoted.single.mau-lang",
+					"begin": "'",
+					"end": "'"
+				},
 				{
-					"name": "constant.character.escape.mau-lang",
-					"match": "\\\\."
+					"name": "string.quoted.double.mau-lang",
+					"begin": "\"",
+					"end": "\""
+				},
+				{
+					"name": "string.regexp.mau-lang",
+					"begin": "\\$\\{",
+					"end": "\\}"
 				}
 			]
 		},
@@ -99,15 +99,39 @@
 		"numbers": {
 			"patterns": [
 				{
-					"name": "keyword.other.unit.suffix.integer.mau-lang",
-					"match": "(^-?[0-9][0-9\\.]+$)"
+					"name": "constant.numeric",
+					"match": "[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?"
 				}
 			]
 		},
 		"todo-keyword": {
 			"match": "TODO",
 			"name": "keyword.todo"
+		},
+		"bool": {
+			"patterns": [
+				{
+					"match": "\\b(true|false|null)\\b",
+					"name": "constant.language.mau-lang"
+				}
+			]
 		}
+	},
+	"markups": {
+		"patterns": [
+			{
+				"name": "markup.bold.mau-lang",
+				"match": "\\b(mau-lang)\\b"
+			},
+			{
+				"name": "constant.character.mau-lang",
+				"match": "(@)"
+			},
+			{
+				"name": "keyword.other.mau-lang",
+				"match": "\\b(int|str|bool|float|CLS|CLEAR)\\b"
+			}
+		]
 	},
 	"scopeName": "source.mau"
 }
