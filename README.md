@@ -3,11 +3,24 @@
 
 extension : `.mau`
 
+# Highlighting
+
+Para activar el `sintax highlighting` hay una carpeta que se llama `highlight` y aqui tienes los pasos para tenerlo.
+
+> SOLO SE PUEDE EN VSC
+
+```sh
+  $ cd highlight
+  $ cp -r ./mau-lang/ ~/.vscode/extensions/ # Tu ruta para extensions, suele ser asi
+  $ cd ..
+  $ code .
+```
+
 ## Syntaxis
 
 Asi seria un comentario en este lenguage de programacion
 
-```
+```js
 //- Mi comentario
 ```
 

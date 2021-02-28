@@ -19,7 +19,7 @@ end
 
 printLn(arr)
 
-# While loops / sumar strings / sumar numeros / bools (true, false) / if statements / continue / break
+//- While loops / sumar strings / sumar numeros / bools (true, false) / if statements / continue / break
 
 var init_str = ""
 var init_num = 5
@@ -89,7 +89,7 @@ CLS()
 printLn(false)
 printLn(not false)
 
-# if not
+// if not
 #    ^^^
 
 # if true or "hola"
