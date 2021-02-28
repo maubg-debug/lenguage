@@ -1707,6 +1707,11 @@ class BuiltInFunction(BaseFunction):
     return RTResult().success(String(text))
   execute_input.arg_names = []
 
+  def execute_exit(self, exec_ctx):
+    exit(0)
+    return RTResult().success(String(text))
+  execute_exit.arg_names = []
+
   def execute_sleep(self, exec_ctx):
     tiempo = repr(exec_ctx.symbol_table.get('value'))
 
@@ -2037,6 +2042,7 @@ BuiltInFunction.bool      	= BuiltInFunction("bool")
 BuiltInFunction.type				= BuiltInFunction("type")
 BuiltInFunction.isinstance	= BuiltInFunction("isinstance")
 BuiltInFunction.has_value	  = BuiltInFunction("has_value")
+BuiltInFunction.exit     	  = BuiltInFunction("exit")
 
 #######################################
 # CONTEXTO
@@ -2357,6 +2363,7 @@ global_symbol_table.set("bool", BuiltInFunction.bool)
 global_symbol_table.set("type", BuiltInFunction.type)
 global_symbol_table.set("isinstance", BuiltInFunction.isinstance)
 global_symbol_table.set("has_value", BuiltInFunction.has_value)
+global_symbol_table.set("exit", BuiltInFunction.exit)
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 # 

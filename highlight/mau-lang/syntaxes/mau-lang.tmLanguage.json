@@ -15,6 +15,12 @@
 			"include": "#numbers"
 		},
 		{
+			"include": "#reserved-words"
+		},
+		{
+			"include": "#keywords"
+		},
+		{
 			"include": "#paren-expression"
 		},
 		{
@@ -22,12 +28,6 @@
 		},
 		{
 			"include": "#ctrl-expressions"
-		},
-		{
-			"include": "#reserved-words"
-		},
-		{
-			"include": "#keywords"
 		},
 		{
 			"include": "#markups"
@@ -52,7 +52,7 @@
 			"patterns": [
 				{
 					"name": "variable.language.mau-lang",
-					"match": "\\b(func|var)\\b"
+					"match": "\\b(func|var|continue|break)\\b"
 				}
 			]
 		},
@@ -60,7 +60,7 @@
 			"patterns": [
 				{
 					"name": "keyword.control.mau-lang",
-					"match": "\\b(if|while|for|return|end|then)\\b"
+					"match": "\\b(else|if|while|for|to|not|and|or|return|end|then)\\b"
 				}
 			]
 		},
