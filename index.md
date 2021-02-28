@@ -148,10 +148,20 @@ var arr = [10, 20 , 30, 50, 40]
 
 printLn(arr)
 
-join(arr, 60)
-has_value(arr, 60) //- true
-pop(arr, 60)
+join(arr, 10)
+pop(arr, 1)
 extend(arr, [1, 3, 4, 6])
+
+var arr_ = ["uno", "dos", "tres"]
+var arr2 = arr_ + ["cuatro", "cinco"]
+
+printLn(length(arr2)) //- len()
+
+printLn(arr/int_input()) //- seria igual a array[num]
+
+printLn([1,2,3,4]*[5,6,7,8])
+
+//- ...
 ```
 
 Para mas funcionalidad y diversion hemos añadido algunos build-in para hacerlos mas interesante
