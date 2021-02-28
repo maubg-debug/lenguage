@@ -24,13 +24,11 @@ else:
             result, error = maulen.run('<stdin>', texto)
 
             if error:
-                print(error.como_string())
+                print(error.as_string())
             elif result:
                 if len(result.elements) == 1:
-                    print("\n\n - Se ha finalizado el programa :: " +
-                          repr(result.elements[0]) + " - \n\n")
+                    print(repr(result.elements[0]))
                 else:
-                    print("\n\n Se ha finalizado el programa :: " +
-                          repr(result) + " - \n\n")
+                    print(repr(result))
         except KeyboardInterrupt:
-            print("\n - pon exit() para salir - \n")
+            rpint("\n - pon exit() para salir - \n")

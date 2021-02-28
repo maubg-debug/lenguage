@@ -12,13 +12,13 @@
 			"include": "#strings"
 		},
 		{
-			"include": "#numbers"
-		},
-		{
 			"include": "#reserved-words"
 		},
 		{
 			"include": "#keywords"
+		},
+		{
+			"include": "#numbers"
 		},
 		{
 			"include": "#paren-expression"

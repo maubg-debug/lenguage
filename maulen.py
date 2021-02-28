@@ -16,6 +16,7 @@ import time
 DIGITOS = '0123456789'
 LETRAS = string.ascii_letters
 LETRAS_DIGITOS = LETRAS + DIGITOS
+_SCRIPT = None
 
 #######################################
 # ERROES
@@ -1207,7 +1208,7 @@ class Parser:
     if self.current_tok.type != TT_NEWLINE:
       return res.failure(InvalidSyntaxError(
         self.current_tok.posicion_inicial, self.current_tok.posicion_final,
-        f"Se esperaba '->' or NUEVALINEA"
+        f"Se esperaba '->' o NUEVALINEA"
       ))
 
     res.register_advancement()
@@ -1709,7 +1710,7 @@ class BuiltInFunction(BaseFunction):
 
   def execute_exit(self, exec_ctx):
     exit(0)
-    return RTResult().success(String(text))
+    return RTResult().success(Number.true)
   execute_exit.arg_names = []
 
   def execute_sleep(self, exec_ctx):
@@ -1951,39 +1952,9 @@ class BuiltInFunction(BaseFunction):
 
   execute_type.arg_names = ["value"]
 
-  def execute_has_value(self, exec_ctx):
-    list_ = exec_ctx.symbol_table.get("list")
-    value = exec_ctx.symbol_table.get("value")
-
-    if not isinstance(list_, List):
-      return RTResult().failure(RTError(
-        self.posicion_inicial, self.posicion_final,
-        "El segundo argumento debe ser una cadena",
-        exec_ctx
-      ))
-
-    if isinstance(value, String):
-      value = str(value)
-    elif isinstance(value, Number):
-      if "." in str(value):
-        value = float(str(value))
-      else:
-        value = int(str(value))        
-
-    for i in list_.elements:
-      if isinstance(i, Number):
-        i = int(repr(i)) if not "." in str(i) else float(repr(i))
-      if isinstance(i, String):
-        i = str(i)
-
-      if value == i:
-        return RTResult().success(Number.true)
-    
-    return RTResult().success(Number.false)
-
-  execute_has_value.arg_names = ["list", "value"]
-
   def execute_run(self, exec_ctx):
+    global _SCRIPT
+
     fn = exec_ctx.symbol_table.get("fn")
 
     if not isinstance(fn, String):
@@ -1998,6 +1969,7 @@ class BuiltInFunction(BaseFunction):
     try:
       with open(fn, "r") as f:
         script = f.read()
+        _SCRIPT = script
     except Exception as e:
       return RTResult().failure(RTError(
         self.posicion_inicial, self.posicion_final,
@@ -2041,7 +2013,6 @@ BuiltInFunction.float				= BuiltInFunction("float")
 BuiltInFunction.bool      	= BuiltInFunction("bool")
 BuiltInFunction.type				= BuiltInFunction("type")
 BuiltInFunction.isinstance	= BuiltInFunction("isinstance")
-BuiltInFunction.has_value	  = BuiltInFunction("has_value")
 BuiltInFunction.exit     	  = BuiltInFunction("exit")
 
 #######################################
@@ -2362,7 +2333,6 @@ global_symbol_table.set("float", BuiltInFunction.float)
 global_symbol_table.set("bool", BuiltInFunction.bool)
 global_symbol_table.set("type", BuiltInFunction.type)
 global_symbol_table.set("isinstance", BuiltInFunction.isinstance)
-global_symbol_table.set("has_value", BuiltInFunction.has_value)
 global_symbol_table.set("exit", BuiltInFunction.exit)
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
