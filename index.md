@@ -103,12 +103,12 @@ En este lenguage de programmacion se puede hacer dos tipos de funciones (la norm
 
 func bio(nombre, edad) -> "Hola, " + nombre + " | Edad: " + edad
 
-func cojer_edad() //- Puedes pasar argumentos separados por una `,`
+func cojer_edad() then //- Puedes pasar argumentos separados por una `,`
     var edad = int_input()
     return str(edad)
 end
 
-func main()
+func main() then
     var nombre = input()
     var edad = cojer_edad()
 
@@ -121,7 +121,7 @@ main()
 En este lenguage de programacion tambien se puede hacer mas cosas con los build-in functions como por ejemplo hacer que el programa se pare por un momento o tambien checkear de que tipo una variable es.
 
 ```js
-func main()
+func main() then
     printLn("main")
 end
 
