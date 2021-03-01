@@ -60,7 +60,7 @@
 			"patterns": [
 				{
 					"name": "keyword.control.mau-lang",
-					"match": "\\b(else|if|while|for|to|not|and|or|return|end|then)\\b"
+					"match": "\\b(do|else|if|while|for|to|not|and|or|return|end|then)\\b"
 				}
 			]
 		},

@@ -138,7 +138,7 @@ KEYWORDS = [
   'step',
   'while',
   'func',
-  'then',
+  'do',
   'end',
   'return',
   'continue',
@@ -953,10 +953,10 @@ class Parser:
     condition = res.register(self.expr())
     if res.error: return res
 
-    if not self.current_tok.matches(TT_KEYWORD, 'then'):
+    if not self.current_tok.matches(TT_KEYWORD, 'do'):
       return res.failure(InvalidSyntaxError(
         self.current_tok.posicion_inicial, self.current_tok.posicion_final,
-        "Se esperaba 'then'"
+        "Se esperaba 'do'"
       ))
 
     res.register_advancement()
@@ -1045,10 +1045,10 @@ class Parser:
     else:
       step_value = None
 
-    if not self.current_tok.matches(TT_KEYWORD, 'then'):
+    if not self.current_tok.matches(TT_KEYWORD, 'do'):
       return res.failure(InvalidSyntaxError(
         self.current_tok.posicion_inicial, self.current_tok.posicion_final,
-        "Se esperaba 'then'"
+        "Se esperaba 'do'"
       ))
 
     res.register_advancement()
@@ -1092,10 +1092,10 @@ class Parser:
     condition = res.register(self.expr())
     if res.error: return res
 
-    if not self.current_tok.matches(TT_KEYWORD, 'then'):
+    if not self.current_tok.matches(TT_KEYWORD, 'do'):
       return res.failure(InvalidSyntaxError(
         self.current_tok.posicion_inicial, self.current_tok.posicion_final,
-        "Se esperaba 'then'"
+        "Se esperaba 'do'"
       ))
 
     res.register_advancement()
@@ -1205,10 +1205,10 @@ class Parser:
         True
       ))
     
-    if not self.current_tok.matches(TT_KEYWORD, 'then'):
+    if not self.current_tok.matches(TT_KEYWORD, 'do'):
       return res.failure(InvalidSyntaxError(
         self.current_tok.posicion_inicial, self.current_tok.posicion_final,
-        f"Se esperaba '->' o 'then'"
+        f"Se esperaba '->' o 'do'"
       ))
 
     res.register_advancement()

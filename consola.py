@@ -9,12 +9,6 @@ if len(argv) == 2:
 
     if error:
         print(error.como_string())
-    elif result:
-        if len(result.elements) == 1:
-            print("\n - Se ha finalizado el programa :: " +
-                  repr(result.elements[0]) + " - \n")
-        else:
-            print("\n Se ha finalizado el programa :: " + repr(result) + " - \n")
 else:
     while True:
         try:
