@@ -1911,17 +1911,22 @@ class BuiltInFunction(BaseFunction):
   execute_extend.arg_names = ["listA", "listB"]
 
   def execute_len(self, exec_ctx):
-    list_ = exec_ctx.symbol_table.get("list")
+    obj_ = exec_ctx.symbol_table.get("object")
 
-    if not isinstance(list_, List):
+    if isinstance(obj_, Function) or isinstance(obj_, Number):
       return RTResult().failure(RTError(
         self.posicion_inicial, self.posicion_final,
-        "El argumento debe ser una lista",
+        "El argumento no puede ser un numero o funcion",
         exec_ctx
       ))
 
-    return RTResult().success(Number(len(list_.elements)))
-  execute_len.arg_names = ["list"]
+    if isinstance(obj_, List):
+      obj_ = obj_.elements
+    elif isinstance(obj_, String):
+      obj_ = str(obj_)
+
+    return RTResult().success(Number(len(obj_)))
+  execute_len.arg_names = ["object"]
 
   def execute_type(self, exec_ctx):
     obj = exec_ctx.symbol_table.get("value")
