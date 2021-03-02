@@ -25,4 +25,4 @@ else:
                 else:
                     print(repr(result))
         except KeyboardInterrupt:
-            rpint("\n - pon exit() para salir - \n")
+            print("\n - pon exit() para salir - \n")
