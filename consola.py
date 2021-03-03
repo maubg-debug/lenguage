@@ -31,4 +31,4 @@ else:
           else:
               print(repr(result))
     except KeyboardInterrupt:
-        print("\n - pon exit() para salir - \n")
+        print("\n\n - pon exit() para salir - \n")

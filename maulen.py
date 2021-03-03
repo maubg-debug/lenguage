@@ -1751,7 +1751,7 @@ class BuiltInFunction(BaseFunction):
       if char not in DIGITOS:
         return RTResult().failure(RTError(
           self.posicion_inicial, self.posicion_final,
-          "En el argumento hay un caracter ({}) que no se puede convertir a int()",
+          f"En el argumento hay un caracter ({char}) que no se puede convertir a int()",
           exec_ctx
         ))
     
