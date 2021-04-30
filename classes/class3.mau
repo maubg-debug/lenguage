@@ -1,0 +1,49 @@
+
+//- FOR / WHILE / (CONTINUE, BREAK) / Arrays
+
+//- for: Esto es un loop en el que solo se ejecuta cuando
+//-      la condicion es true
+
+//- EJEMPLO:
+for i = 0 to 5 do
+    //- Creamos una variable llamada i, y cada vez
+    //- que el loop termine, i se incrementara uno mas
+    //- asta que sea 5
+
+    //- I = 0 al principio
+    printLn(i)
+end
+
+//- while, se ejecuta infinitamente asta que la condicion sea falsa
+printLn("Escribe tu edad")
+while int_input() < 18 do
+    //- Un loop infinito seria: "while true do"
+    printLn("No eres tan mallor, intentalo otra vez")
+end
+
+//- Break / continue
+printLn("-----------------------------------------------------------")
+while true do
+    var edad = int_input()
+
+    if edad < 18 do
+        printLn("No eres tan mallor, intentalo mas tarde")
+        //- El continue haze que el loop continue sin tener que hacer la parte de abajo
+        //- Ejecutandolo se ve claramente
+        continue
+    end
+
+    printLn("Bienvenido!")
+    //- Break hace que el loop se rompa
+    break
+end
+
+
+//- Como vimos en la clase 1, los arrays son una lista con articulos
+var numeros = [10, 2, 3, 5, 18]
+
+for num = 0 to length(numeros) do
+    //- Cojemos el elemento "num" de la lista
+    //- Empieza por 0
+    printLn(numeros/num)
+end

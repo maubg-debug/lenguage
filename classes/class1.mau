@@ -1,0 +1,40 @@
+//- Input / Output
+
+//- Para declarar una variable, la palabra clave es "var"
+//- ej: var foo = "bar"
+var num = 8
+
+//- Las variables pueden tener distintos tipos de "types"
+//- Lista:
+//- 1) Strings - Empiezan con " o con '
+//- 2) Numeros - Son numeros enteros (integers) [10] o Numeros con punto decimal (floats) [10.0]
+//- 3) Booleanos - Son true o false.
+//- 4) Arrays - Son listas que contiene valores, estan entre []
+//- 5) Funciones - Se pueden declarar con la palabra func
+
+//- Como conseguir input de la consola
+//- Se puede haciendo input(), pero como lo queremos en numero seria:
+var n = int_input()
+
+//- Para hacer imprimir texto en la pantalla, podemos llamar al build-in llamado printLn(texto)
+printLn("La suma es:")
+printLn(n + num)
+
+//- OPERADORES:
+//- + : Sumar
+//- - : Restar
+//- * : Multiplicar
+//- / : Dividir
+//- ^ : Elevado a ...
+printLn("OPERADORES:")
+printLn(1 + 2)
+printLn(2 - 1)
+printLn(1 * 2)
+printLn(1 / 2)
+printLn(5 ^ 2)
+
+//- NOTA: No se puede dividir por 0
+
+
+//- PONLO EN PRACTICA
+//- Intenta hacer que el usuario aga un input con su nombre, y ponlo en la pantalla

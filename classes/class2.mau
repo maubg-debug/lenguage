@@ -1,0 +1,38 @@
+
+//- IF / ELSE IF / ELSE
+
+//- La sintaxis para el "if statement" sesria:
+//- -------------------------------
+//- if condicion do
+//-     ...
+//- end
+//- -------------------------------
+//- Condicion deve de ser true para que el bloque de codigo que este
+//- dentro de el if statement se ejecutara
+
+var num = 10
+printLn("Escribe un numero")
+var intento = int_input()
+
+if intento == num do
+    printLn("Correcto!")
+end
+
+
+//- El "else if statement" hace de que si el "if statement" no es true
+//- Se ejecuta el "else if" pero su condicion tambien tiene que ser true
+
+printLn("Escribe tu edad")
+var edad = int_input()
+
+if edad == 18 do
+    printLn("Pasas por lo minimo")
+else if edad > 18 do
+    printLn("Hola, bienvenido")
+else
+    printLn("No eres tan mallor")
+end
+
+//- NOTAS:
+//- : No tiene que haver un else if
+//- : else if / else no pueden estar sin un if
