@@ -24,10 +24,17 @@ def main():
           continue
         result, error = maulen.run('<stdin>', texto)
 
+<<<<<<< HEAD
         if error:
           print(error.as_string())
         elif result:
             if len(result.elements) == 1:
+=======
+      if error:
+          print(error.como_string())
+      elif result:
+          if len(result.elements) == 1:
+>>>>>>> 1dbd4c44153c9e9c0ab280324b6e7dd9431e2108
               print(repr(result.elements[0]))
             else:
               print(repr(result))

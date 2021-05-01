@@ -1,8 +1,0 @@
-
-func main(name) do
-    printLn(name)
-end
-
-main(name="lel")
-
-//- printLn("Hello, whats your name?")
