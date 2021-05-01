@@ -1,0 +1,42 @@
+
+var intentos = []
+var correcto = false
+var numero = 23
+
+printLn("Intenta adivinar el numero!!!")
+
+while true do
+    
+    var num = int_input()
+    append(intentos, num)
+
+    if num < numero do
+        printLn("Mas   (>)")
+        continue
+    else if num > numero do
+        printLn("Menos (<)")
+        continue
+    end
+
+    printLn("Felizidades!!!")
+    
+    printLn("Intentos ----")
+    printLn("")
+    printLn("")
+    printLn("")
+    for i = 0 to length(intentos) do
+        if i < 9 do
+            //- La veremos el build-in "str" function en la siguiente clase
+            if intentos / i == numero do
+                printLn(str(i + 1) + "      : " + str(intentos / i) + " <----")
+            else
+                printLn(str(i + 1) + "      : " + str(intentos / i))
+            end
+        else
+            printLn("...")
+            break
+        end
+    end
+    
+    break
+end

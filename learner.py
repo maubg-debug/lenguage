@@ -1695,7 +1695,11 @@ class BuiltInFunction(BaseFunction):
   #####################################
 
   def execute_print(self, exec_ctx):
-    print(str(exec_ctx.symbol_table.get('value')))
+    val = exec_ctx.symbol_table.get('value')
+    if isinstance(val, List):
+      print("[" + str(exec_ctx.symbol_table.get('value')) + "]" )    
+    else:
+      print(str(exec_ctx.symbol_table.get('value')))
     return RTResult().success(Number.null)
   execute_print.arg_names = ['value']
 
@@ -2326,7 +2330,7 @@ global_symbol_table.set("is_int", BuiltInFunction.is_number)
 global_symbol_table.set("is_str", BuiltInFunction.is_string)
 global_symbol_table.set("is_list", BuiltInFunction.is_list)
 global_symbol_table.set("is_func", BuiltInFunction.is_function)
-global_symbol_table.set("join", BuiltInFunction.append)
+global_symbol_table.set("append", BuiltInFunction.append)
 global_symbol_table.set("pop", BuiltInFunction.pop)
 global_symbol_table.set("extend", BuiltInFunction.extend)
 global_symbol_table.set("length", BuiltInFunction.len)

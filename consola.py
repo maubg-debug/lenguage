@@ -1,4 +1,4 @@
-import maulen
+import learner
 import sys
 
 def main():
@@ -10,7 +10,7 @@ def main():
     
     file = argv[1]
     try:
-      result, error = maulen.run(f'<{file}>', f'run("{file}")')
+      result, error = learner.run(f'<{file}>', f'run("{file}")')
     except KeyboardInterrupt:
       exit(0)
 
@@ -22,19 +22,12 @@ def main():
         texto = input('>>> ')
         if texto.strip() == "":
           continue
-        result, error = maulen.run('<stdin>', texto)
+        result, error = learner.run('<stdin>', texto)
 
-<<<<<<< HEAD
         if error:
-          print(error.as_string())
+          print(error.como_string())
         elif result:
             if len(result.elements) == 1:
-=======
-      if error:
-          print(error.como_string())
-      elif result:
-          if len(result.elements) == 1:
->>>>>>> 1dbd4c44153c9e9c0ab280324b6e7dd9431e2108
               print(repr(result.elements[0]))
             else:
               print(repr(result))

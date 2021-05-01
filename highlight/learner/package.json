@@ -1,0 +1,25 @@
+{
+    "name": "learner",
+    "displayName": "MUL",
+    "description": "Un lenguage de programacion totalmente nuevo con caracteristicas en la que lo separan de el resto",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.53.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "learner",
+            "aliases": ["learn", "learner"],
+            "extensions": [".ls"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "learner",
+            "scopeName": "source.ls",
+            "path": "./syntaxes/learner.tmLanguage.json"
+        }]
+    }
+}

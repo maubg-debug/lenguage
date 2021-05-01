@@ -47,3 +47,10 @@ for num = 0 to length(numeros) do
     //- Empieza por 0
     printLn(numeros/num)
 end
+
+
+//- EJERCICIO:
+//- Hacer un juego en el que el usuario tiene que escribir un numero.
+//- Si el numero es mallor al "numero random" (No tiene que ser random)
+//- Que ponga "menos" y si es menos que el numero "mas", el usuario tiene
+//- 5 intentos y si consigue hacertar el numero, que ponga "felizidades!!!"

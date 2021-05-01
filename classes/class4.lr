@@ -1,0 +1,34 @@
+
+//- ARRAYS
+
+//- Vamos a dar un poco mas sobre las arrays :)
+//- Para crear un array se hace asi:
+var arr = []
+//- Puedes ponerle mas cosas dentro de los braquets separados por coma
+//- var arr = [1, 2, 3, 4, "hola"] : infinitamente
+
+//- Para añadir un articulo a la lista se puede hacer coin este build-in function
+append(arr, "Hola")
+append(arr, "Mundo")
+
+printLn("ARRAY 1 ---------------------------------")
+printLn(arr)
+
+//- Al igual que se pueden añadir, se pueden eliminar
+printLn("ARRAY 2 ---------------------------------")
+
+//- Lo eliminamos aqui
+//- Eliminamos mundo
+//- NOTA: Las arrays empiezan por 0
+pop(arr, 1)
+
+append(arr, "programador")
+printLn(arr)
+
+//- Para cojer un elemento de una array, se puede hacer asi
+printLn("SEGUNDO ELEMENTO DE LA ARRAY ------------")
+var miSegundoElemento = arr/1
+printLn(miSegundoElemento)
+
+//- Vamos a hacer un juego...
+//- El juego esta en classes/class5.lr
