@@ -1,7 +1,7 @@
-# mau-lang
+# learner
  Un lenguaje de programacion total mente nuevo hecho por mi
 
-extension : `.mau`
+extension : `.lr`
 
 # Highlighting
 
@@ -11,7 +11,7 @@ Para activar el `sintax highlighting` hay una carpeta que se llama `highlight` y
 
 ```sh
   $ cd highlight
-  $ cp -r ./mau-lang/ ~/.vscode/extensions/ # Tu ruta para extensions, suele ser asi
+  $ cp -r ./learner/ ~/.vscode/extensions/ # Tu ruta para extensions, suele ser asi
   $ cd ..
   $ code .
 ```
